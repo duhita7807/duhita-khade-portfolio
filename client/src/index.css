@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+body {
+  @apply bg-white text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100;
+}
+
+::selection {
+  @apply bg-blue-200 text-slate-900 dark:bg-blue-500/40 dark:text-white;
+}
+
+.section-wrap {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+.card {
+  @apply rounded-xl border border-slate-200 bg-white shadow-card transition duration-300 dark:border-slate-800 dark:bg-slate-900 dark:shadow-card-dark;
+}
+
+.card-hover {
+  @apply hover:-translate-y-1 hover:border-blue-200 hover:shadow-glow dark:hover:border-blue-900/60;
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.14em] text-blue-600 dark:text-blue-400;
+}
+
+a, button {
+  outline-offset: 3px;
+}
+a:focus-visible, button:focus-visible {
+  @apply outline outline-2 outline-blue-500;
+}
+
+.btn-primary {
+  @apply inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:-translate-y-0.5 hover:from-blue-500 hover:to-cyan-400;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center gap-2 rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-blue-400 hover:text-blue-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-500 dark:hover:text-blue-300;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 bg-clip-text text-transparent;
+}
+
+.bg-grid {
+  background-image: linear-gradient(rgb(148 163 184 / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(148 163 184 / 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
