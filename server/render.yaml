@@ -3,12 +3,20 @@ services:
     name: portfolio-api
     runtime: node
     plan: free
+    rootDir: server
     buildCommand: npm install
     startCommand: npm start
+    healthCheckPath: /api/health
     envVars:
       - key: MONGO_URI
         sync: false
-      - key: PORT
-        value: 5000
       - key: CLIENT_ORIGIN
+        sync: false
+      - key: EMAIL_SERVICE
+        value: gmail
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: CONTACT_RECEIVER
         sync: false

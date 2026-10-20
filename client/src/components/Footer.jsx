@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { profile } from "../data/content.js";
 
 function Footer() {
@@ -22,6 +22,9 @@ function Footer() {
           </a>
           <a href={`mailto:${profile.email}`} aria-label="Email" className="rounded-full p-2 hover:text-blue-600">
             <Mail size={18} />
+          </a>
+          <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="rounded-full p-2 hover:text-emerald-600">
+            <MessageCircle size={18} />
           </a>
         </div>
       </div>

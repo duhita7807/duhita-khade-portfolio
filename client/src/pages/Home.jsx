@@ -6,7 +6,6 @@ const Skills = lazy(() => import("../components/Skills.jsx"));
 const Projects = lazy(() => import("../components/Projects.jsx"));
 const Experience = lazy(() => import("../components/Experience.jsx"));
 const Achievements = lazy(() => import("../components/Achievements.jsx"));
-const Certificates = lazy(() => import("../components/Certificates.jsx"));
 const Education = lazy(() => import("../components/Education.jsx"));
 const Resume = lazy(() => import("../components/Resume.jsx"));
 const Contact = lazy(() => import("../components/Contact.jsx"));
@@ -25,7 +24,6 @@ function Home() {
         <Projects />
         <Experience />
         <Achievements />
-        <Certificates />
         <Education />
         <Resume />
         <Contact />

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Download, Github, Linkedin } from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { profile } from "../data/content.js";
 import photoWebp from "../assets/duhita-photo.webp";
 import photoJpg from "../assets/duhita-photo.jpg";
@@ -61,6 +61,22 @@ function Hero() {
               className="text-slate-500 transition hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
             >
               <Linkedin size={20} />
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              aria-label="Email"
+              className="text-slate-500 transition hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+            >
+              <Mail size={20} />
+            </a>
+            <a
+              href={profile.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="text-slate-500 transition hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400"
+            >
+              <MessageCircle size={20} />
             </a>
           </div>
         </motion.div>
