@@ -120,7 +120,7 @@ The frontend build output is in `client/dist`.
 
 **Backend (Render, Railway, or any Node host)**
 
-1. Deploy the `server` folder. `server/render.yaml` is included as a starting point for Render.
+1. Deploy the `server` folder. `render.yaml` (repo root) is included as a starting point for Render.
 2. Set environment variables: `MONGO_URI` (a MongoDB Atlas connection string works well for production), `PORT`, and `CLIENT_ORIGIN` (your deployed frontend URL, so CORS allows it).
 3. Start command: `npm start`.
 
