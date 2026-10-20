@@ -81,7 +81,6 @@ function Contact() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // No backend (e.g. static hosting) -> hand the message to the visitor's mail app instead of failing.
   const openMailFallback = () => {
     const body = `${form.message}\n\n— ${form.name} (${form.email})`;
     window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(body)}`;
@@ -91,22 +90,22 @@ function Contact() {
   const onSubmit = async (event) => {
     event.preventDefault();
     setStatus({ type: "", text: "" });
-
-    const apiUrl = import.meta.env.VITE_API_URL;
-    if (!apiUrl) {
-      openMailFallback();
-      return;
-    }
-
     setLoading(true);
+
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 20000);
 
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      // Render's free plan blocks SMTP, so mail goes out over HTTPS via FormSubmit straight to Gmail.
+      const response = await fetch(`https://formsubmit.co/ajax/${profile.email}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          ...form,
+          _subject: `[Portfolio] ${form.subject}`,
+          _template: "table",
+          _captcha: "false",
+        }),
         signal: controller.signal,
       });
 
@@ -114,19 +113,15 @@ function Contact() {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || String(data.success) !== "true") {
         throw new Error(data.message || "Unable to send message.");
       }
 
-      setStatus({ type: "success", text: data.message });
+      setStatus({ type: "success", text: "Thank you! Your message has been sent." });
       setForm(initialForm);
-    } catch (error) {
-      if (error instanceof TypeError || error.name === "AbortError") {
-        // Server unreachable — the form contents are still in state, so fall back to email.
-        openMailFallback();
-      } else {
-        setStatus({ type: "error", text: error.message || "Something went wrong. Please try again." });
-      }
+    } catch {
+      // Form contents are still in state, so hand them to the visitor's mail app instead of losing them.
+      openMailFallback();
     } finally {
       setLoading(false);
     }
